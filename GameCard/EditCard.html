@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.24/bootstrap-native-v4.min.js" integrity="sha256-16hTHCII55cR+mQRXxx1o2uQ1ruYZPooGr/L9JHhq9E="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../plugin/vanillatoasts.css" />
+    <script src="../plugin/vanillatoasts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/gamecard-1.0.0.css?20190122" />
+    <script type="text/javascript" src="../js/gamecard-1.0.0.js"></script>
+    <title>EditGameCard</title>
+    <style type="text/css">
+        .input,
+        .input:focus {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            color: white;
+            box-sizing: border-box;
+            font-family: 'Arvo';
+            font-size: 18px;
+            height: 50px;
+            left: 50%;
+            margin: -25px 0 0 -100px;
+            padding: 10px 0px;
+            position: relative;
+            top: 50%;
+            width: 190px;
+            text-align: center;
+        }
+
+        .need {
+            border-bottom: 1px solid red;
+        }
+
+        .details,
+        .details:focus {
+            background-color: rgba(0, 0, 0, 0);
+            color: white;
+            border-color: red;
+        }
+
+        .bg-primary.title-board {
+            background-color: #337ab7 !important;
+            text-align: center;
+            color: white;
+
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .hv {
+            background-color: rbga(0, 0, 0, 0);
+
+        }
+        .hv:hover {
+            background-color: rgba(230, 255, 153, 0.8);
+            color: white;
+        }
+
+        #prevw {
+            color: #0099ff;
+            border-radius: 50%;
+        }
+       
+        /*cover*/
+    </style>
+</head>
+<body class="styBlack">
+    <!--cover-->
+    <div id="menu" class="overlay">
+        <div class="container overlay-content">
+            <a href="https://www.manager-shop.xyz/gc/web/Index" id="menu-index" class="menu-index">HOME</a>
+            <a href="http://www.manager-shop.xyz/gc/web/Create" id="menu-create" class="menu-create">CREATE</a>
+            <br><br><br><br><br>
+            <hr style="border-color:yellow;">
+            <a href="javascript:void(0)" id="menu-close" class="menu-close">&times;</a>
+        </div>
+    </div>
+    <!--cover-->
+    <div class="bg-primary title-board" style="padding-top:1px;width: 100%;">
+        <br>
+        <h4 style="font-size: 18px">Game Card</h4>
+        <span style="cursor:pointer" id="menu-open" class="btn-menu">&#9776;MENU</span>
+        <br>
+    </div>
+    <div class='container-fluid'>
+        <center>
+            <div class="upload-btn-wrapper hv">
+                <img id='prevw' src='../img/camera.png' width='150px' height='150px' alt='選擇照片'>
+                <input type="file" id='imgUpload' accept="image/png,image/gif,image/jpeg,image/jpg" onchange="document.getElementById('prevw').src = window.URL.createObjectURL(this.files[0])" />
+                <h6 style='color:white'>(圖片限制:1.5MB)</h6>
+            </div><br><br>
+        </center>
+        <div class="row">
+            <div class="col-6">
+                <b><input id='gamename' type="text" class="form-control input need" name="gamename" placeholder="遊戲名稱(必填)"></b>
+            </div>
+            <div class="col-6 ">
+                <b><input id='userid' type="text" class="form-control input need" name="userid" placeholder="遊戲ID(必填)"></b>
+            </div>
+            <br><br><br>
+            <div class="col-6 ">
+                <b><input id='server' type='text' class="form-control input" name='server' placeholder="伺服器" /></b>
+            </div>
+            <div class="col-6">
+                <b><input id='fbid' type='text' class='form-control input' name='fbid' placeholder="Facebook" /></b>
+            </div>
+            <br><br><br>
+            <div class="col-6 ">
+                <b><input id='lineid' type='text' class="form-control input" name='lineid' placeholder="LineID" /></b>
+            </div>
+            <div class="col-6 ">
+                <b><input id='youtube' type='text' class="form-control input" name='youtube' placeholder="Youtube Channel" /></b>
+            </div>
+            <br><br><br>
+            <div class="col-6 ">
+                <b><input id='twitchid' type='text' class="form-control input" name='twitch' placeholder="TwitchID" /></b>
+            </div>
+            <div class="col-6 ">
+                <b><input id='ig' type='text' class="form-control input" name='ig' placeholder="Instagram" /></b>
+            </div>
+            <br><br><br>
+            <div class="col-6 ">
+                <b><input id='gamplexid' type='text' class="form-control input" name='gamplex' placeholder="GamplexID" /></b>
+            </div>
+            <div class="col-6 ">
+                <b><input id='discordid' type='text' class="form-control input" name='discord' placeholder="DiscordID" /></b>
+            </div>
+            <br><br><br>
+            <div class="col-md-12">
+                <center>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <b><textarea id='details' type='text' class="form-control details" name='details' placeholder="遊戲相關詳細資料，例如牌位、裝備、等級、擅長角色，或外部連結。"></textarea></b>
+                    </div>
+                    <br><br>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-outline-danger btn-lg" id='delTo' style="padding:8px 3px;">DELETE</button>
+                        <button class='btn btn-outline-warning btn-lg' id="editTo">EDIT</button>
+                        <br><br>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <!-- Modal-->
+        <div class="modal" id="editndelModal">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header styBlack" style="text-align: center;">
+                        <h4 class="modal-title" style="color:#F0AD4E;text-align: center;font-size: 18px">請輸入私鑰進行驗證</h4>
+                        <button type="button" class="close" style="color:#F0AD4E" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body styBlack">
+                        <input type="text" id="privatekey" class="form-control" placeholder="私鑰" />
+                        
+                        <br>
+                        <button type="button" class="btn btn-danger float-left" data-dismiss="modal">取消</button>
+                        <button type="button" id="editSend" class="btn btn-success float-right">修改</button>
+                        <button type="button" id='deleteSend' class="btn btn-outline-danger btn-del float-right">刪除</button>
+                        <br><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function ItemHide() {
+        var item = ['editSend', 'deleteSend'];
+        item.forEach(GETID);
+    }
+
+    function GETID(itemID) {
+        document.getElementById(itemID).style.display = 'none';
+    }
+
+    this.onload = function () {
+        ItemHide();
+        var photo = "{{.photourl}}";
+        var DATANAME = ["gamename", "userid", "server", "fbid", "lineid", "youtube", "twitchid", "ig", "gamplexid",
+            "discordid", "details"
+        ];
+        var DATAVALUE = ["{{.gamename}}", "{{.userid}}", "{{.server}}", "{{.fbid}}", "{{.lineid}}", "{{.youtube}}",
+            "{{.twitchid}}", "{{.ig}}", "{{.gamplexid}}", "{{.discordid}}", "{{.details}}"
+        ];
+        if (photo !== "") {
+            document.getElementById('prevw').src = photo;
+        }
+        for (i = 0; i < DATANAME.length; i++) {
+            document.getElementById(DATANAME[i]).value = DATAVALUE[i];
+        }
+    };
+    document.getElementById('menu-open').onclick = function () {
+        document.getElementById("menu").style.width = "100%";
+    };
+
+    document.getElementById('menu-close').onclick = function () {
+        document.getElementById("menu").style.width = "0%";
+    }
+    document.getElementById('delTo').onclick = function () {
+        ItemHide();
+        document.getElementById('deleteSend').style.display = 'block';
+        var editNdelModal = document.getElementById('editndelModal');
+        var modalOpen = new Modal(editNdelModal, {
+            backdrop: 'static',
+            keyboard: false
+        });
+        modalOpen.show();
+    };
+    document.getElementById('editTo').onclick = function () {
+        ItemHide();
+        document.getElementById('editSend').style.display = 'block';
+        var editModal = document.getElementById('editndelModal');
+        var modalOpen = new Modal(editModal, {
+            backdrop: 'static',
+            keyboard: false
+        });
+        modalOpen.show();
+    };
+    document.getElementById('deleteSend').onclick = function () {
+        var publicKey = '{{.publickey}}';
+        var privateKey = document.getElementById('privatekey').value;
+        var jsonData = JSON.stringify({
+            'public_key': publicKey,
+            'private_key': privateKey
+        });
+        if (publicKey === "" || privateKey === "") {
+            ToastCreate('警告', '必填的未填', 'warning');
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:8080/gc/api/Delete');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.resp !== "FAIL") {
+                        ToastCreate('成功', '名片已經註銷', 'success');
+                        window.location.replace('http://localhost:8080/gc/web/Index');
+                    } else {
+                        ToastCreate('警告', '失敗', 'error');
+                    }
+                } else {
+
+                    ToastCreate('警告', '失敗', 'error');
+                }
+            };
+            xhr.send(jsonData);
+        }
+
+    };
+    document.getElementById('editSend').onclick = function () {
+        var file = document.getElementById('imgUpload').files[0];
+        var publicKey = "{{.publickey}}";
+        var privateKey = document.getElementById('privatekey').value;
+        var keyName = ['game_name', 'user_id', 'server_name', 'line_id', 'youtube', 'twitch_id',
+            'ig_id', 'fb_id', 'gpx_id', 'discord_id', 'details'
+        ];
+        var itemId = ['gamename', 'userid', 'server', 'lineid', 'youtube', 'twitchid',
+            'ig', 'fbid', 'gamplexid', 'discordid', 'details'
+        ];
+        var SENDDATA = new FormData();
+        SENDDATA.append("public_key", publicKey);
+        SENDDATA.append("private_key", privateKey);
+        if (file !== undefined) {
+            SENDDATA.append('img', file);
+        }
+        for (i = 0; i < itemId.length; i++) {
+            SENDDATA.append(keyName[i], document.getElementById(itemId[i]).value);
+        }
+        if (publicKey === "" || privateKey === "") {
+            ToastCreate('成功', '名片已經註銷', 'success');
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open('PATCH', 'http://localhost:8080/gc/api/Edit');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.resp !== "FAIL") {
+                        window.location.replace('http://localhost:8080/gc/web/View?public_key=' + response.resp);
+                    } else {
+                        ToastCreate('警告', '失敗', 'error');
+                    }
+                } else {
+                    ToastCreate('警告', '失敗', 'error');
+                }
+            };
+            xhr.send(SENDDATA);
+        }
+    };
+</script>
+
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.24/bootstrap-native.min.js" integrity="sha256-uvE2kQ51Y9LF9kVpIWSJ/e/bFghzcAbl+wQLrvVTWWs="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../plugin/vanillatoasts.css" />
+    <script src="../plugin/vanillatoasts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/gamecard-1.0.0.css?20190122" />
+    <script type="text/javascript" src="../js/gamecard-1.0.0.js"></script>
+    <title>NewGameCard</title>
+    <style type="text/css">
+        .input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            color: white;
+            box-sizing: border-box;
+            font-family: 'Arvo';
+            font-size: 18px;
+            height: 50px;
+            left: 50%;
+            margin: -25px 0 0 -100px;
+            padding: 10px 0px;
+            position: relative;
+            top: 50%;
+            width: 190px;
+            text-align: center;
+        }
+
+        .need {
+            border-bottom: 1px solid red;
+        }
+
+        .details {
+            background-color: rgba(0, 0, 0, 0);
+            color: white;
+            border-color: red;
+        }
+
+        .bg-primary.title-board {
+            text-align: center;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .hv {
+            background-color: rbga(0, 0, 0, 0);
+        }
+
+        .hv:hover {
+            background-color: rgba(230, 255, 153, 0.8);
+            color: white;
+        }
+
+        #prevw {
+            color: #0099ff;
+            border-radius: 50%;
+        }
+
+        #gamecardlink {
+            background-color: black;
+            border-color: #28A745;
+            border-radius: 0%;
+            color: #28A745;
+        }
+    </style>
+
+</head>
+
+<body class="styBlack">
+    <!--cover-->
+    <div id="menu" class="overlay">
+        <div class="container overlay-content">
+            <a href="https://www.manager-shop.xyz/gc/web/Index" id="menu-index" class="menu-index">HOME</a>
+            <br><br><br><br><br>
+            <hr style="border-color:yellow;">
+            <a href="javascript:void(0)" id="menu-close" class="menu-close">&times;</a>
+        </div>
+    </div>
+    <!--cover-->
+    <div class='container'>
+        <div class="row ">
+            <div class="bg-primary title-board" style="padding-top:1px">
+                <br>
+                <h4>Game Card</h4>
+                <span style="cursor:pointer" id="menu-open" class="btn-menu">&#9776;MENU</span>
+                <br>
+            </div>
+            <br>
+            <center>
+                <div class="upload-btn-wrapper hv">
+                    <img id='prevw' src='../img/camera.png' width='150px' height='150px' alt='選擇照片'>
+                    <input type="file" id='imgUpload' accept="image/png,image/gif,image/jpeg,image/jpg" onchange="document.getElementById('prevw').src = window.URL.createObjectURL(this.files[0])" />
+                    <h6 style='color:white'>(圖片限制:1.5MB)</h6>
+                </div>
+            </center>
+            <br><br>
+            <div class="col-md-12 ">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='gamename' type="text" class="form-control input need" name="gamename" placeholder="遊戲名稱(必填)"></b>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='userid' type="text" class="form-control input need" name="userid" placeholder="遊戲ID(必填)"></b>
+                </div>
+                <br><br><br>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='server' type='text' class="form-control input" name='server' placeholder="伺服器" /></b>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='fbid' type='text' class='form-control input' name='fbid' placeholder="Facebook" /></b>
+                </div>
+                <br><br><br>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='lineid' type='text' class="form-control input" name='lineid' placeholder="LineID" /></b>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='youtube' type='text' class="form-control input" name='youtube' placeholder="Youtube Channel" /></b>
+                </div>
+                <br><br><br>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='twitch' type='text' class="form-control input" name='twitch' placeholder="TwitchID" /></b>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='ig' type='text' class="form-control input" name='ig' placeholder="Instagram" /></b>
+                </div>
+                <br><br><br>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='gamplex' type='text' class="form-control input" name='gamplex' placeholder="GamplexID" /></b>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <b><input id='discord' type='text' class="form-control input" name='discord' placeholder="DiscordID" /></b>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br><br><br>
+                <center>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <b><textarea id='details' type='text' class="form-control details" name='details' placeholder="遊戲相關詳細資料，例如牌位、裝備、等級、擅長角色，或外部連結。"></textarea></b>
+                    </div>
+                    <br><br>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <br><br>
+                        <button class='btn btn-success btn-lg' id="createTo">CREATE</button>
+                        <br><br>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <!-- Modal-->
+        <div class="modal" id="createModal">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header styBlack">
+                        <h4 class="modal-title" style="color:#F0AD4E;text-align: center">使用注意事項</h4>
+                        <button type="button" class="close" style="color:#F0AD4E" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body styBlack">
+                        <h5 id="warningShow" style="color:white">警告！強烈不建議留下個人隱私資料。Facebook建議填寫粉絲頁；Line建議填寫Line@或群組連結，此服務不希望有過多的設限，還望各位斟酌。</h5>
+                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">不同意</button>
+                        <button type="button" id="cardSend" class="btn btn-success pull-right">同意</button>
+                        <br><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="createSuccessModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header styBlack">
+                        <h4 class="modal-title" style="color:#F0AD4E;text-align: center">名片建立成功</h4>
+                        <button type="button" class="close" style="color:#F0AD4E" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body styBlack">
+                        <h5 style="color:white;"></h5>
+                        <input type="text" class="form-control" id="gamecardlink" />
+                        <h5 class="privatekeyShow" id="privatekey" style="color:white"></h5>
+                        <input type="text" class="form-control" id="email" />
+                        <div type="button" class="btn btn-info" id="sendMe">寄給我</div>
+                        <button type="button" class="btn btn-success" data-dismiss="modal"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById('createTo').onclick = function () {
+        var createtoModal = document.getElementById('createModal');
+        var modalOpen = new Modal(createtoModal, {
+            backdrop: 'static',
+            keyboard: false
+        });
+        modalOpen.show();
+    };
+    document.getElementById('cardSend').onclick = function () {
+        DataSend();
+    };
+    //FUNCTION
+    function DataSend() {
+
+        var modalOpen = new Modal(successModal, {
+            backdrop: 'static',
+            keyboard: false
+        });
+        var file = document.getElementById('imgUpload').files[0];
+        var userId = document.getElementById('userid').value;
+        var gameName = document.getElementById('gamename').value;
+        var lineId = document.getElementById('lineid').value;
+        var youtube = document.getElementById('youtube').value;
+        var twitchId = document.getElementById('twitch').value;
+        var serverName = document.getElementById('server').value;
+        var discordId = document.getElementById('discord').value;
+        var fbId = document.getElementById('fbid').value;
+        var igId = document.getElementById('ig').value;
+        var gamplexId = document.getElementById('gamplex').value;
+        var details = document.getElementById('details').value;
+        var cardLink = document.getElementById('gamecardlink');
+        var privateKeyShow = document.getElementById('privatekey');
+        var presendData = new FormData();
+        var keyName = ['game_name', 'user_id', 'server_name', 'line_id', 'youtube', 'twitch_id',
+            'ig_id', 'fb_id', 'gpx_id', 'discord_id', 'details'
+        ];
+        var values = [gameName, userId, serverName, lineId, youtube, twitchId, igId, fbId,
+            gamplexId, discordId, details
+        ];
+        for (var i = 0; i <= keyName.length - 1; i++) {
+            presendData.append(keyName[i], values[i]);
+        }
+        if (file !== undefined) {
+            presendData.append("IMG", file);
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:8080/gc/api/CreateData', true);
+        xhr.onload = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.CARD_CREATE.includes('FORMAT_ERR')) {
+                   ToastCreate('警告','檔案格式錯誤','error');
+                } else {
+                    cardLink.value = response.GamecardLink;
+                    privateKeyShow.innerText = "私鑰:" + response.PrivateKey;
+                    document.getElementById('sendMe').setAttribute('cardlink', response.GamecardLink);
+                    document.getElementById('sendMe').setAttribute('privatekey', response.PrivateKey);
+                    modalOpen.show();
+                }
+            }
+        };
+        if (gameName === "" || userId === "" || details === "") {
+            ToastCreate('警告','必填的未填','warning');
+        } else {
+            xhr.send(presendData);
+        }
+    }
+    document.getElementById('gamecardlink').onclick = function () {
+        var publicKey = document.getElementById('gamecardlink');
+        publicKey.select();
+        document.execCommand('copy');
+        ToastCreate('成功','已複製名片連結至剪貼簿','success');
+    };
+    document.getElementById('sendMe').onclick = function () {
+        var eMail = document.getElementById('email').value;
+        var link = this.getAttribute('cardlink');
+        var publicKey = link.split(link, "?public_key=")[1];
+        var privateKey = this.getAttribute('privatekey');
+        var jsonData = JSON.stringify({
+            "email": eMail,
+            "public_key": publicKey,
+            "private_key": privateKey
+        });
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://www.manager-shop.xyz/gc/api/SendMail");
+        xhr.onload = function () {
+             var response = JSON.parse(xhr.responseText).resp;
+             if(response.includes("FAIL")){
+                ToastCreate('失敗','寄送失敗','error');
+             }else{
+                ToastCreate('成功','寄送成功','success');
+             }
+        };
+        xhr.send(jsonData);
+    };
+  
+    document.getElementById('menu-open').onclick = function () {
+        document.getElementById("menu").style.width = "100%";
+    };
+
+    document.getElementById('menu-close').onclick = function () {
+        document.getElementById("menu").style.width = "0%";
+    };
+</script>
+
+</html>

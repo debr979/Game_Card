@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.24/bootstrap-native-v4.min.js" integrity="sha256-16hTHCII55cR+mQRXxx1o2uQ1ruYZPooGr/L9JHhq9E="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../plugin/vanillatoasts.css" />
+    <script src="../plugin/vanillatoasts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/gamecard-1.0.0.css?20190122" />
+    <script type="text/javascript" src="../js/gamecard-1.0.0.js"></script>
+    <title>ViewGameCard</title>
+    <style>
+        .info-title {
+            color: green;
+            text-align: center;
+        }
+
+        .info-show {
+            color: white;
+            text-align: center;
+        }
+        .info-detail{
+            color:white;
+            
+        }
+    </style>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-7088731767307145",
+            enable_page_level_ads: true
+        });
+    </script>
+</head>
+
+<body class="styBlack">
+    <div id="menu" class="overlay">
+        <div class="container overlay-content">
+            <a href="https://www.manager-shop.xyz/gc/web/Index" id="menu-index" class="menu-index">HOME</a>
+            <a href="https://www.manager-shop.xyz/gc/web/Create" id="menu-create" class="menu-create">CREATE</a>
+            <br><br><br><br><br>
+            <hr style="border-color:yellow;">
+            <a href="javascript:void(0)" id="menu-close" class="menu-close">&times;</a>
+        </div>
+    </div>
+    <div class="bg-primary title-board" style="padding-top:1px;width: 100%;">
+        <br>
+        <h4 style="font-size: 18px">Game Card</h4>
+        <span style="cursor:pointer" id="menu-open" class="btn-menu">&#9776;MENU</span>
+        <br>
+    </div>
+    <div class='container-fluid'>
+        <center>
+            <div class="upload-btn-wrapper hv">
+                <img id='prevw' src='../img/camera.png' width='150px' height='150px'>
+            </div><br><br>
+        </center>
+        <div class="row" id='userinfo'></div><br><br>
+        <div class="col-12 " style="text-align: center;">
+            <button class="btn btn-outline-danger btn-lg" id='delTo' style="padding:8px 3px;">DELETE</button>
+            <button class='btn btn-outline-warning btn-lg' id="editTo">EDIT</button>
+            <br><br>
+        </div>
+        <br>
+        <div class="modal" id="editndelModal">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header styBlack" style="text-align: center;">
+                        <h4 class="modal-title" style="color:#F0AD4E;text-align: center;font-size: 18px">請輸入私鑰進行驗證</h4>
+                        <button type="button" class="close" style="color:#F0AD4E" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body styBlack">
+                        <input type="text" id="privatekey" class="form-control" placeholder="私鑰" />
+                        <br>
+                        <button type="button" class="btn btn-danger float-left" data-dismiss="modal">取消</button>
+                        <button type="button" id='deleteSend' class="btn btn-outline-danger btn-del float-right">刪除</button>
+                        <br><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    this.onload = function () {
+        var photoURL = '{{.photourl}}';
+        var userInfo = document.getElementById('userinfo');
+        if (photoURL !== "") {
+            document.getElementById('prevw').src = photoURL;
+        }
+        var infoTitle = ['遊戲名稱', '角色名稱', '伺服器', 'FB', 'Line', 'Youtube', 'Twitch', 'Instagram', 'Gamplex',
+            'Discord', '詳細資料'
+        ];
+        var infoValues = ['{{.gamename}}', '{{.userid}}', '{{.server}}', '{{.fbid}}', '{{.lineid}}',
+            '{{.youtube}}', '{{.twitchid}}', '{{.ig}}', '{{.gamplexid}}', '{{.discordid}}', '{{.details}}'
+        ];
+        var divID = ['gamename', 'userid', 'server', 'fb', 'line', 'youtube', 'twitch', 'ig', 'gamplex', 'discord',
+            'details'
+        ];
+        for (i = 0; i < infoValues.length - 1; i++) {
+            if (infoValues[i] !== "") {
+                userinfo.innerHTML += '<div class="col-6 info-show"><h5 class="info-title">' + infoTitle[i] +
+                    '</h5>' + infoValues[i] + '</div>';
+                if (i % 2 === 1) {
+                    userInfo.innerHTML += '<div class="col-12"><hr style="border-color:yellow;" ></div>';
+                }
+            }
+
+        }
+        userinfo.innerHTML += '<div class="col-12 info-detail"><h5 class="info-title">' + infoTitle[10] + '</h5>' +
+            infoValues[10] + '</div>'
+    };
+    document.getElementById('delTo').onclick = function(){
+        var delModal = document.getElementById('editndelModal');
+        var modalOpen = new Modal(delModal,{
+            backdrop:'static',
+            keyboard:false
+        });
+        modalOpen.show();
+    };
+    document.getElementById('deleteSend').onclick = function () {
+        var publicKey = '{{.publickey}}';
+        var privateKey = document.getElementById('privatekey').value;
+        var jsonData = JSON.stringify({
+            'public_key': publicKey,
+            'private_key': privateKey
+        });
+        if (publicKey === "" || privateKey === "") {
+            ToastCreate('警告', '必填的未填', 'warning');
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://www.manager-shop.xyz/gc/api/Delete');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.resp !== "FAIL") {
+                        ToastCreate('成功', '名片已經註銷', 'success');
+                        window.location.replace('https://www.manager-shop.xyz/gc/web/Index');
+                    } else {
+                        ToastCreate('警告', '失敗', 'error');
+                    }
+                } else {
+
+                    ToastCreate('警告', '失敗', 'error');
+                }
+            };
+            xhr.send(jsonData);
+        }
+
+    };
+    document.getElementById('editTo').onclick = function () {
+        var publicKey = "{{.publickey}}";
+        window.location.replace('https://www.manager-shop.xyz/gc/web/Edit?public_key=' + publicKey);
+    };
+    document.getElementById('menu-open').onclick = function () {
+        document.getElementById("menu").style.width = "100%";
+    };
+
+    document.getElementById('menu-close').onclick = function () {
+        document.getElementById("menu").style.width = "0%";
+    }
+</script>
+
+</html>
