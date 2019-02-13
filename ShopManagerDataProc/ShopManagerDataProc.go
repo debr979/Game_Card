@@ -30,8 +30,8 @@ type GcWeb struct {
 }
 
 const (
-	db_userName     = "debr979"
-	db_password     = "sd958969"
+	db_userName     = "*"
+	db_password     = "*"
 	db_host         = "mysql.cbjvyxndfwyr.ap-northeast-1.rds.amazonaws.com"
 	dbName_RealTime = "RealTimeCall"
 	dbName_GameCard = "GameBCard"
@@ -539,8 +539,8 @@ func SSLVerification() string {
 	return vcode
 }
 func MailSend(targerMail string, subject string, body string) {
-	from := "dougforservice@gmail.com"
-	pass := "doug958969"
+	from := "*@gmail.com"
+	pass := "*"
 	to := targerMail
 	signature := "Doug Pr."
 	msg := "From: " + from + "\n" +
