@@ -32,7 +32,7 @@ type GcWeb struct {
 const (
 	db_userName     = "*"
 	db_password     = "*"
-	db_host         = "mysql.cbjvyxndfwyr.ap-northeast-1.rds.amazonaws.com"
+	db_host         = "*"
 	dbName_RealTime = "RealTimeCall"
 	dbName_GameCard = "GameBCard"
 )
